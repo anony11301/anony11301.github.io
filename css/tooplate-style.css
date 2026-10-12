@@ -769,3 +769,72 @@ footer .copyright-text {
   50% { transform: scale(1.5); }
   100% { transform: scale(1); }
 }
+
+/*---------------------------------------
+   COMMENTS
+-----------------------------------------*/
+
+.like-btn.cmt-btn { left: 82px; }
+
+.cmt-modal {
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: 10000;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.cmt-box {
+  background: #ffffff;
+  width: 100%;
+  max-width: 440px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.cmt-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+}
+.cmt-close {
+  border: 0;
+  background: none;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+.cmt-list {
+  list-style: none;
+  margin: 0;
+  padding: 12px 16px;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 120px;
+}
+.cmt-list li { margin-bottom: 10px; word-wrap: break-word; }
+.cmt-list b { margin-right: 4px; }
+.cmt-empty { color: #999; }
+.cmt-form {
+  display: flex;
+  gap: 6px;
+  padding: 10px 12px;
+  border-top: 1px solid #eee;
+}
+.cmt-form input { padding: 6px 8px; border: 1px solid #ddd; border-radius: 4px; min-width: 0; }
+.cmt-form .cmt-name { width: 25%; }
+.cmt-form .cmt-text { flex: 1; }
+.cmt-form button {
+  border: 0;
+  background: #ed4956;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
