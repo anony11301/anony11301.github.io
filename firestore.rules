@@ -1,0 +1,14 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /likes/{id} {
+      allow read: if true;
+      // hanya boleh naik/turun 1, dan tidak boleh negatif
+      allow create: if request.resource.data.keys().hasOnly(['count'])
+                    && request.resource.data.count == 1;
+      allow update: if request.resource.data.keys().hasOnly(['count'])
+                    && request.resource.data.count >= 0
+                    && math.abs(request.resource.data.count - resource.data.count) == 1;
+    }
+  }
+}

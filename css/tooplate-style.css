@@ -436,10 +436,26 @@ a:hover, a:active, a:focus {
 }
 
 .project-info {
-  padding: 12em 0;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  padding: 0 15px;
+  transform: translateY(-50%);
 }
 
+.project-item {
+  height: 380px;
+}
+.project-item > a {
+  display: block;
+  height: 100%;
+}
 .project-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
   -webkit-transition: all ease-in-out 0.4s;
   transition: all ease-in-out 0.4s;
 }
@@ -717,4 +733,39 @@ footer .copyright-text {
   .project-info {
     padding: 5em 0;
   }
+}
+
+@media (max-width: 767px) {
+  .project-item { height: 320px; }
+}
+
+/*---------------------------------------
+   LIKE BUTTON
+-----------------------------------------*/
+
+.like-btn {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 20px;
+  background: rgba(0,0,0,0.55);
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.like-btn:hover { background: rgba(0,0,0,0.75); }
+.like-btn:active { transform: scale(0.9); }
+.like-btn.liked i { color: #ed4956; animation: like-pop 0.3s ease; }
+
+@keyframes like-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.5); }
+  100% { transform: scale(1); }
 }
