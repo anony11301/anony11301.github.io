@@ -484,8 +484,6 @@ a:hover, a:active, a:focus {
 -----------------------------------------*/
 
 #team .item {
-  display: block;
-  width: 100%;
   margin-bottom: 22px;
 }
 
