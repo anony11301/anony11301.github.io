@@ -1,8 +1,14 @@
 import Gallery from './Gallery';
 import Navbar from './Navbar';
 import Preloader from './Preloader';
+import UploadForm from './UploadForm';
+import { getPhotos } from '../lib/getPhotos';
 
-export default function Home() {
+export const revalidate = 0;
+
+export default async function Home() {
+  const photos = await getPhotos();
+
   return (
     <>
       <Preloader />
@@ -46,7 +52,8 @@ export default function Home() {
       <section id="project" className="parallax-section">
         <div className="container">
           <div className="row">
-            <Gallery />
+            <UploadForm />
+            <Gallery photos={photos} />
           </div>
         </div>
       </section>

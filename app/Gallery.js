@@ -13,7 +13,6 @@ import {
   setDoc,
 } from 'firebase/firestore';
 import { db } from '../lib/firebase';
-import { photoId, photos } from './photos';
 
 const MINE_KEY = 'gallery-likes'; // status "sudah saya like" per browser
 const NAME_KEY = 'gallery-comment-name';
@@ -116,10 +115,10 @@ function CommentModal({ id, comments, onClose }) {
   );
 }
 
-function Lightbox({ index, onClose, onChange }) {
+function Lightbox({ photos, index, onClose, onChange }) {
   const photo = photos[index];
-  const prev = useCallback(() => onChange((index - 1 + photos.length) % photos.length), [index, onChange]);
-  const next = useCallback(() => onChange((index + 1) % photos.length), [index, onChange]);
+  const prev = useCallback(() => onChange((index - 1 + photos.length) % photos.length), [index, onChange, photos.length]);
+  const next = useCallback(() => onChange((index + 1) % photos.length), [index, onChange, photos.length]);
 
   useEffect(() => {
     const onKey = (e) => {
@@ -161,7 +160,7 @@ function Lightbox({ index, onClose, onChange }) {
   );
 }
 
-export default function Gallery() {
+export default function Gallery({ photos }) {
   const [counts, setCounts] = useState({}); // id -> jumlah like (dari Firestore)
   const [mine, setMine] = useState({});     // id -> true jika browser ini sudah like
   const [comments, setComments] = useState({}); // id -> daftar komentar
@@ -179,8 +178,7 @@ export default function Gallery() {
         setCounts(next);
       })
     );
-    photos.forEach(({ src }) => {
-      const id = photoId(src);
+    photos.forEach(({ id }) => {
       const q = query(collection(db, 'photos', id, 'comments'), orderBy('createdAt', 'asc'));
       unsubs.push(
         onSnapshot(q, (snap) => {
@@ -189,7 +187,7 @@ export default function Gallery() {
       );
     });
     return () => unsubs.forEach((u) => u());
-  }, []);
+  }, [photos]);
 
   const toggleLike = (id) => {
     const nowLiked = !mine[id];
@@ -207,10 +205,10 @@ export default function Gallery() {
   return (
     <>
       {photos.map((photo, i) => {
-        const id = photoId(photo.src);
+        const id = photo.id;
         const liked = !!mine[id];
         return (
-          <div className="col-md-6 col-sm-6" key={photo.src}>
+          <div className="col-md-6 col-sm-6" key={photo.id}>
             <div className="project-item">
               <a
                 href={photo.src}
@@ -254,7 +252,7 @@ export default function Gallery() {
       {openComments && (
         <CommentModal id={openComments} comments={comments[openComments] || []} onClose={closeComments} />
       )}
-      {lightbox !== null && <Lightbox index={lightbox} onClose={closeLightbox} onChange={setLightbox} />}
+      {lightbox !== null && <Lightbox photos={photos} index={lightbox} onClose={closeLightbox} onChange={setLightbox} />}
     </>
   );
 }

@@ -11,6 +11,7 @@
     "next": "^15.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "firebase": "^10.14.1"
+    "firebase": "^10.14.1",
+    "@vercel/blob": "^1.0.0"
   }
 }

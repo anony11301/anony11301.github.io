@@ -880,3 +880,24 @@ html { scroll-behavior: smooth; }
   text-align: center;
   color: #d9d9d9;
 }
+
+/*---------------------------------------
+   UPLOAD
+-----------------------------------------*/
+
+.upload-wrap { margin-bottom: 25px; text-align: center; }
+.upload-toggle,
+.upload-form button {
+  border: 0;
+  background: #ed4956;
+  color: #ffffff;
+  padding: 8px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.upload-form button:disabled { opacity: 0.6; cursor: default; }
+.upload-form .upload-cancel { background: #999999; }
+.upload-form { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; align-items: center; }
+.upload-form input[type="text"],
+.upload-form input[type="password"] { padding: 7px 10px; border: 1px solid #dddddd; border-radius: 4px; }
+.upload-msg { width: 100%; margin: 6px 0 0; }
